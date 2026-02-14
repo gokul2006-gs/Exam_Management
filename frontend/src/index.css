@@ -1,0 +1,218 @@
+:root {
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --primary: 230 70% 55%;
+  --primary-hover: 230 70% 45%;
+  --secondary: 160 84% 39%;
+
+  --bg-dark: 220 13% 18%;
+  --bg-darker: 220 13% 12%;
+  --text-primary: 0 0% 100%;
+  --text-secondary: 215 20% 65%;
+
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 10px;
+
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+
+  --error: 0 84% 60%;
+  --success: 142 71% 45%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: hsl(var(--bg-darker));
+  color: hsl(var(--text-primary));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: hsl(var(--primary));
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* Glassmorphism Classes */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+}
+
+.glass-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(22, 27, 34, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Specific Navigation styles */
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: hsl(var(--text-primary));
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-margin {
+  margin-right: 0.5rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+/* Inputs & Forms */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: hsl(var(--text-secondary));
+  font-size: 0.9rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: white;
+  transition: all 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsla(var(--primary) / 0.2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: hsl(var(--primary));
+  color: white;
+}
+
+.btn-primary:hover {
+  background: hsl(var(--primary-hover));
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: white;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Auth Page Layout */
+.auth-container {
+  min-height: calc(100vh - 80px);
+  /* nav height approx */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
