@@ -19,7 +19,7 @@ import StudyMaterials from './pages/StudyMaterials';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Exam_Management">
       <AuthProvider>
         <Navbar />
         <Routes>
