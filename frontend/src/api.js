@@ -58,6 +58,7 @@ export const simulatePayment = (regId) => examApi.post(`payment/${regId}/`);
 
 export const getStudentRegistrations = () => examApi.get('registrations/student/');
 export const getStaffRegistrations = (examId) => examApi.get(`registrations/staff/${examId ? '?exam_id=' + examId : ''}`);
+export const getHallTicket = (regId) => examApi.get(`hall-ticket/${regId}/`);
 
 export const getMaterials = () => examApi.get('materials/');
 export const uploadMaterial = (data) => examApi.post('materials/', data, {

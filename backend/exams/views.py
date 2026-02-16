@@ -153,6 +153,34 @@ class StudentDocumentUploadView(APIView):
             return Response(StudentDocumentSerializer(doc_instance).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def get_hall_ticket(request, registration_id):
+    registration = get_object_or_404(Registration, pk=registration_id)
+    
+    # Security: Only student or staff can view
+    if registration.student != request.user and not (request.user.is_school_staff or request.user.is_superuser):
+        return Response({'detail': 'Not authorized.'}, status=status.HTTP_403_FORBIDDEN)
+    
+    if not registration.payment_status:
+        return Response({'detail': 'Payment not completed. Please pay to generate hall ticket.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    # Return structured data for Hall Ticket
+    data = {
+        'registration_id': registration.id,
+        'student_name': f"{registration.student.first_name} {registration.student.last_name}" or registration.student.username,
+        'student_email': registration.student.email,
+        'student_id': getattr(registration.student.student_profile, 'student_id', 'N/A'),
+        'exam_title': registration.exam.title,
+        'exam_date': registration.exam.date,
+        'exam_time': registration.exam.time,
+        'exam_venue': registration.exam.venue,
+        'barcode_placeholder': f"EXAM-{registration.id}-{registration.exam.id}",
+        'issued_on': timezone.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+    
+    return Response(data, status=status.HTTP_200_OK)
+
 class AIRAGAdviceView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     

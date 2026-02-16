@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     ExamListCreateView, ExamDetailView,
     register_for_exam, simulate_payment, StudentRegistrationsListView, ExamRegistrationsListView,
-    StudyMaterialListCreateView, StudentDocumentUploadView, AIRAGAdviceView
+    StudyMaterialListCreateView, StudentDocumentUploadView, AIRAGAdviceView, get_hall_ticket
 )
 
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     path('payment/<int:registration_id>/', simulate_payment, name='simulate-payment'),
     path('registrations/student/', StudentRegistrationsListView.as_view(), name='student-registrations'),
     path('registrations/staff/', ExamRegistrationsListView.as_view(), name='staff-exam-registrations'),
+    path('hall-ticket/<int:registration_id>/', get_hall_ticket, name='hall-ticket'),
     
     # Study Materials
     path('materials/', StudyMaterialListCreateView.as_view(), name='material-list-create'),
